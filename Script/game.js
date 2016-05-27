@@ -1,47 +1,17 @@
 /**
  * Created by dylan on 22-May-16.
  */
-var Game=function () {
-  this.level=0;
-
-};
-
-Game.prototype.renderLevel=function () {
-
-};
-
-var Level = function () {
-
-}
-
-Level.prototype.print=function () {
-    jsp=AssetMgr.getAsset("marioHDold.json");
-    console.log(jsp);
-};
-
-Level.prototype.renderMap=function () {
-
-};
-
-Level.prototype.renderPhysicObject=function () {
-
-};
-
-
-
+var AssetMgr = new AssetManager();
 function float2int (value) {
     return value | 0;
 }
 
-
-
-
-function Map(path,mapTilePath){
-    this.mapJsonPath=path;
+function Map(path,mapTilePath) {
+    this.mapJsonPath = path;
     this.mapJsonGraphics;
-    this.mapJsonPhysics=[];
+    this.mapJsonPhysics = [];
     this.mapJsonData;
-    this.mapTilesPath=mapTilePath;
+    this.mapTilesPath = mapTilePath;
 
     this.classifyData=function (array) {
 
@@ -72,24 +42,22 @@ function Map(path,mapTilePath){
                 var yImageSource = float2int((this.mapJsonGraphics[i]-1) / 12) * 72;
                 var xImageSource = (((this.mapJsonGraphics[i] - 1) % 12)) * 72; //seems good
                ctx.drawImage(img, xImageSource, yImageSource, 72, 72, posX, posY, 72, 72);  //change Y move the drawing to the right the whole drawing
-//console.log(posX)
             }
         }
     }
 
     this.renderPhysicObject=function () {
-
-        console.log(this.mapJsonPhysics);
         for (var i = 0; i < this.mapJsonPhysics.length; i++) {
 
             for (var z = 0; z < this.mapJsonPhysics[i].objects.length; z++) {
-                console.log(this.mapJsonPhysics[i].name)
+                //console.log(this.mapJsonPhysics[i].name)
                 box2d.createSingleBody({
                     name: this.mapJsonPhysics[i].name, shape: 'rectangle', density: 1, friction: 0.3, restitution: 0.6,
                     x: this.mapJsonPhysics[i].objects[z].x + (this.mapJsonPhysics[i].objects[z].width / 2) - (0.04 * (this.mapJsonPhysics[i].objects[z].x)),
-                    y: this.mapJsonPhysics[i].objects[z].y + this.mapJsonPhysics[i].objects[z].height + 53,
+                    y: this.mapJsonPhysics[i].objects[z].y + (this.mapJsonPhysics[i].objects[z].height/2),
                     width: this.mapJsonPhysics[i].objects[z].width,
-                    height: this.mapJsonPhysics[i].objects[z].height, type: 'k'
+                    height: this.mapJsonPhysics[i].objects[z].height,
+                    type: 'k'
                 })
             }
 
@@ -98,9 +66,9 @@ function Map(path,mapTilePath){
 
     this.load=function () {
         var that=this;
-        $.getJSON( "marioHDold.json", function( json ) {
+        $.getJSON( this.mapJsonPath, function( json ) {
            that.classifyData(json);
-            that.renderGraphics();
+           // that.renderGraphics();
             that.renderPhysicObject();
 
 
@@ -108,14 +76,67 @@ function Map(path,mapTilePath){
 
     }
 }
+///////////////////////////////////Game Function///////////////////////////////////////////////////////////////////
+var Game=function (assets,entities) {
+    this.entities=entities;
+    this.assets=assets;
+    this.map=null;
+};
 
-function float2int (value) {
-    return value | 0;
+Game.prototype.renderMap=function () {
+    this.map.load();
+};
+Game.prototype.renderEntity=function () {
+    for(var i=0;i<this.entities.length;i++){
+        this.entities[i].animate();
+    }
+};
+
+Game.prototype.loadAssets=function () { //load all assets to cache
+    for(var i=0;i<this.assets.length;i++){
+        AssetMgr.queueDownload(this.assets[i]);
+    }
+};
+Game.prototype.update=function () {
+this.map.load()
 }
 
-function classifyDatas(array){
+Game.prototype.animate=function () {
+    //this.update();
+    var that=this;
+   // ctx.clearRect(0,0,100,2000)
+    window.requestAnimationFrame(function () {
+        box2d.world.Step(1 / 60, 8, 3);
+        box2d.world.ClearForces();
+        box2d.world.DrawDebugData();
+        var timeStep = 1/60;
+        box2d.drawDebug();
+      // that.renderEntity()
+        mario.update();
+        that.animate();
 
+    });
 }
+Game.prototype.start=function () {
+
+    box2d.init();
+    this.loadAssets();
+   this.map=new Map("marioHDold.json","platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png");
+    var that=this;
+
+    AssetMgr.downloadAll(function () {
+        that.map.load();
+        that.animate();
+        //Game.mario.moveRight();
+
+        //that.renderEntity()
+    });
+};
+
+
+
+
+
 
 
 
