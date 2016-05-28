@@ -114,7 +114,7 @@ Mario.prototype.updateAnimation=function () {
 Mario.prototype.draw=function () {
   var marioBody=box2d.getMapBodyPositionCanvas("mario");
   var img = AssetMgr.getAsset (this.spritePath);
-  //context.clearRect (this.x, this.y, this.width, this.height);
+  //context.clearRect (marioBody.x, marioBody.y, this.width, this.height);
   this.currentAnimationCoordinate=this.animationsArray[this.currentAnimationName][this.currentFrame];
   context.drawImage (img,
     this.currentAnimationCoordinate.x, this.currentAnimationCoordinate.y, this.currentAnimationCoordinate.width, this.currentAnimationCoordinate.height,

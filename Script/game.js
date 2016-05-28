@@ -12,7 +12,6 @@ function Map(path,mapTilePath) {
     this.mapJsonPhysics = [];
     this.mapJsonData;
     this.mapTilesPath = mapTilePath;
-
     this.classifyData=function (array) {
 
         for(var i=0; i < array.layers.length; i++) {
@@ -54,8 +53,8 @@ function Map(path,mapTilePath) {
                 //console.log(this.mapJsonPhysics[i].name)
                 box2d.createSingleBody({
                     name: this.mapJsonPhysics[i].name, shape: 'rectangle', density: 1, friction: 0.3, restitution: 0,
-                    x: this.mapJsonPhysics[i].objects[z].x + (this.mapJsonPhysics[i].objects[z].width / 2) - (0.04 * (this.mapJsonPhysics[i].objects[z].x)),
-                    y: this.mapJsonPhysics[i].objects[z].y + (this.mapJsonPhysics[i].objects[z].height/2),
+                    x: this.mapJsonPhysics[i].objects[z].x + (this.mapJsonPhysics[i].objects[z].width / 2) - (0.04 * (this.mapJsonPhysics[i].objects[z].x)), //0.004 is because of offset
+                    y: (this.mapJsonPhysics[i].objects[z].y+(this.mapJsonPhysics[i].objects[z].height/2))+68, //why 68 maybe because graphic was render at evert 68^2
                     width: this.mapJsonPhysics[i].objects[z].width,
                     height: this.mapJsonPhysics[i].objects[z].height,
                     type: 's'
@@ -69,7 +68,7 @@ function Map(path,mapTilePath) {
         var that=this;
         $.getJSON( this.mapJsonPath, function( json ) {
            that.classifyData(json);
-           // that.renderGraphics();
+           that.renderGraphics();
             that.renderPhysicObject();
 
 
@@ -78,6 +77,7 @@ function Map(path,mapTilePath) {
     }
 }
 ///////////////////////////////////Game Function///////////////////////////////////////////////////////////////////
+var map=new Map("marioHDold.json","platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png");
 var Game=function (assets,entities) {
     this.entities=entities;
     this.assets=assets;
@@ -112,30 +112,33 @@ Game.prototype.animate=function () {
         box2d.world.DrawDebugData();
         var timeStep = 1/60;
         box2d.drawDebug();
+map.renderGraphics();
       // that.renderEntity()
+
         mario.update();
+
         that.animate();
 
     });
 }
+
 Game.prototype.start=function () {
-
-
     this.loadAssets();
-   this.map=new Map("marioHDold.json","platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png");
     var that=this;
-
     AssetMgr.downloadAll(function () {
-        that.map.load();
+        map.load();
         that.animate();
         //Game.mario.moveRight();
-
         //that.renderEntity()
     });
 };
 
 
-
+function clamp(value, min, max){
+    if(value < min) return min;
+    else if(value > max) return max;
+    return value;
+}
 
 
 
