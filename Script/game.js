@@ -47,17 +47,18 @@ function Map(path,mapTilePath) {
     }
 
     this.renderPhysicObject=function () {
+
         for (var i = 0; i < this.mapJsonPhysics.length; i++) {
 
             for (var z = 0; z < this.mapJsonPhysics[i].objects.length; z++) {
                 //console.log(this.mapJsonPhysics[i].name)
                 box2d.createSingleBody({
-                    name: this.mapJsonPhysics[i].name, shape: 'rectangle', density: 1, friction: 0.3, restitution: 0.6,
+                    name: this.mapJsonPhysics[i].name, shape: 'rectangle', density: 1, friction: 0.3, restitution: 0,
                     x: this.mapJsonPhysics[i].objects[z].x + (this.mapJsonPhysics[i].objects[z].width / 2) - (0.04 * (this.mapJsonPhysics[i].objects[z].x)),
                     y: this.mapJsonPhysics[i].objects[z].y + (this.mapJsonPhysics[i].objects[z].height/2),
                     width: this.mapJsonPhysics[i].objects[z].width,
                     height: this.mapJsonPhysics[i].objects[z].height,
-                    type: 'k'
+                    type: 's'
                 })
             }
 
@@ -119,7 +120,7 @@ Game.prototype.animate=function () {
 }
 Game.prototype.start=function () {
 
-    box2d.init();
+
     this.loadAssets();
    this.map=new Map("marioHDold.json","platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png");
     var that=this;

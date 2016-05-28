@@ -13,7 +13,7 @@ var ctx=document.getElementById('game').getContext('2d');
 var box2d = {
   scale: 30,
   init: function () {
-    var gravity = new b2Vec2 (0, 0); //declare gravity as 9.8 m/s^2 downward
+    var gravity = new b2Vec2 (0, 9); //declare gravity as 9.8 m/s^2 downward
     var allowSleep = true; //Allow objects that are at rest to fall asleep and be excluded from
     box2d.world = new b2World (gravity, allowSleep);
     var timeStep = 1 / 60;
@@ -48,6 +48,7 @@ var box2d = {
     bodyDef.position.y = (entity.y) / box2d.scale;
     bodyDef.awake = true;
     bodyDef.allowSleep = false;
+    bodyDef.fixedRotation=true;
     //bodyDef.awake=true;
     if (entity.angle) {
       bodyDef.angle = entity.angle;
@@ -89,15 +90,55 @@ var box2d = {
     var body = box2d.world.CreateBody (bodyDef);
     body.SetUserData (entity);
     var fixture = body.CreateFixture (fixtureDef);
-    //apply random impluse
-    var minx = -100;
-    var maxx = 100;
 // and the formula is:
-    randomy=Math.floor(Math.random() * (-100 - 75)) + -75;
-    var randomx = Math.floor(Math.random() * (maxx - minx + 1)) + minx;
-    body.ApplyImpulse ({x:randomx, y:randomy}, body.GetWorldCenter ());
     return body;
   },
+  Impluse: function(bodyName,impulseX,impulseY) { //work only dynamic
+    var bodyToImpulse = box2d.getBodyByName(bodyName);
+    if (bodyToImpulse != null) {
+      bodyToImpulse.ApplyImpulse({x: impulseX, y: impulseY}, bodyToImpulse.GetWorldCenter());
+    }
+    else {
+      console.log("object does not exit how to Impulse ?")
+    }
+
+  },
+  ApplyForce: function(bodyName,forceX,forceY) { //work only dynamic
+    var bodyToForce = box2d.getBodyByName(bodyName);
+    if (bodyToForce != null) {
+
+      bodyToForce.ApplyForce(
+        new b2Vec2(forceX,forceY ),
+        bodyToForce.GetWorldCenter()
+      );
+    }
+    else {
+      console.log("object does not exit how to Impulse ?")
+    }
+
+  },
+  LinearGravity: function(bodyName,vectorX,vectorY) {
+    var bodyToApplyForce = box2d.getBodyByName(bodyName);
+    if (bodyToApplyForce != null) {
+      var direction = new b2Vec2(vectorX, vectorY);
+      bodyToApplyForce.ApplyForce(direction, bodyToApplyForce.GetPosition());
+    }
+    else {
+      console.log("object does not exit how to Impulse ?")
+    }
+
+  },
+  ApplyLinearVelocity: function(bodyName, velocityX, velocityY) { ////work With dynamic , kinematic well
+    var bodyToApplyVelocity = box2d.getBodyByName(bodyName);
+    if (bodyToApplyVelocity != null) {
+      // bodyToApplyVelocity.awake=false;
+      bodyToApplyVelocity.SetLinearVelocity(new b2Vec2(velocityX, velocityY));
+    }
+    else {
+      console.log("object does not exit how to Impulse ?")
+    }
+  },
+
   getBodyByName: function (bodyName) {
     var bodyReturn = null;
     for (var body = box2d.world.GetBodyList (); body; body = body.GetNext ()) {

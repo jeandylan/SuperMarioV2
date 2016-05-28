@@ -32,18 +32,10 @@ function OnResizeCalled() {
 }
 //OnResizeCalled();
 box2d.init();
-function update() {
-  box2d.world.Step(1 / 60, 8, 3);
-  box2d.world.ClearForces();
-  box2d.world.DrawDebugData();
-  var timeStep = 1/60;
- // box2d.drawDebug();
-  window.requestAnimationFrame (update);
-};
 
-//update()
-//var marioAnimation = {'standFrw':[{x:0,y:0,width:125,height:188}],'walking':[{x:0,y:0,width:125,height:188},{x:125,y:0,width:125,height:188}],'jumpFrw':[{x:0,y:376,width:125,height:188}]};
-//var mario=new Entity("mario1","marioRunning2.png",marioAnimation,10,{x:0,y:0,width:125,height:188});
+
+
+
 mario =new Mario("e2de2");
 var marioGame=new Game(["platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png","marioRunning2.png","marioHDold.json"],[mario]);
 
