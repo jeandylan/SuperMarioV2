@@ -15,6 +15,7 @@ var Entity=function (name,spriteSheetPath,animationObjects,minfps,coords) {
   this.continueAnimation=true;
   this.spritePath=spriteSheetPath;
   this.coordCanvas=coords;
+  this.remove=false;
 };
 
 Entity.prototype.startAnimation=function (animationName) {
@@ -22,16 +23,19 @@ Entity.prototype.startAnimation=function (animationName) {
   this.continueAnimation=true;
   this.startAnimation(animationName);
 };
-Entity.prototype.animate=function () {
+Entity.prototype.animate=function (animationName) {
   var img = AssetMgr.getAsset (this.spritePath);
   //get the array of animation coordinate i.e sx,sy,sw,sh
-
+  this.currentAnimationName=null || animationName;
+  
 if(this.validateAnimation()) {
+
   this.maxFrames = this.animationsArray[this.currentAnimationName].length - 1;
   if (this.continueAnimation) {
     var currentAnimationCoordinate = this.animationsArray[this.currentAnimationName][this.currentFrame]; //get  the animation coordinate from image file based on name of current animation\
     // get the animation coordinate for current frame i.e an
-    context.clearRect (this.coordCanvas.x, this.coordCanvas.y, this.coordCanvas.width, this.coordCanvas.height);
+   // console.log(currentAnimationCoordinate)
+    //context.clearRect (this.coordCanvas.x, this.coordCanvas.y, this.coordCanvas.width, this.coordCanvas.height);
     context.drawImage (img,
       currentAnimationCoordinate.x, currentAnimationCoordinate.y, currentAnimationCoordinate.width, currentAnimationCoordinate.height,
       this.coordCanvas.x, this.coordCanvas.y, this.coordCanvas.width, this.coordCanvas.height);

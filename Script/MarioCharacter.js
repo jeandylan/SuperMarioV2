@@ -2,8 +2,10 @@
  * Created by dylan on 27-May-16.
  */
 /////Main Character
-
-function Mario(imagePath){
+var canvas=document.getElementById("game");
+var ctx = canvas.getContext("2d");
+var camera=new Camera(canvas,3000);
+function Mario(){
   this.width=75;
   this.height=100;
   this.maxFrames=2;
@@ -12,6 +14,8 @@ function Mario(imagePath){
   this.currentFrame=0;
   this.minFps=10;
   this.fps=0;
+  this.lives=3;
+  this.score=0;
   this.offset=this.width/4;
   this.currentAnimationName="standFrw"; //initialize default animation
   this.animationsArray= {'walkingFrw':[{x:0,y:0,width:125,height:188},{x:125,y:0,width:125,height:188},{x:0,y:0,width:125,height:188}],
@@ -30,8 +34,8 @@ function Mario(imagePath){
 Mario.prototype.init=function () {
   box2d.createRectangle({
     name: "mario", shape: 'rectangle', density: 1, friction: 0.3, restitution: 0.1,
-    x: 70,
-    y: 510,
+    x: 50,
+    y: 500,
     width: this.width/2,
     height:this.height,
     type: 'd'
@@ -73,6 +77,7 @@ Mario.prototype.reverseRun=function () {
   }
 }
 Mario.prototype.jump=function () {
+
   this.currentFrame=0;
   if(this.direction=="F"){
     this.applyForce(7500,20000);
@@ -116,16 +121,15 @@ Mario.prototype.draw=function () {
   var img = AssetMgr.getAsset (this.spritePath);
   //context.clearRect (marioBody.x, marioBody.y, this.width, this.height);
   this.currentAnimationCoordinate=this.animationsArray[this.currentAnimationName][this.currentFrame];
+  camera.update(marioBody.x,ctx);
   context.drawImage (img,
     this.currentAnimationCoordinate.x, this.currentAnimationCoordinate.y, this.currentAnimationCoordinate.width, this.currentAnimationCoordinate.height,
     marioBody.x-(this.offset), marioBody.y, this.width, this.height);
+
 };
 
 
 Mario.prototype.update=function () {
   this.draw();
   this.updateAnimation();
-}
-Mario.prototype.drawPh=function () {
-
 }

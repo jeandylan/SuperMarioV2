@@ -5,6 +5,11 @@
 var canvas=document.getElementById("game");
 context = canvas.getContext("2d");
 scale=1/20;
+var ctx = canvas.getContext("2d");
+
+
+///////////////////////////////////Game Function///////////////////////////////////////////////////////////////////
+
 viewport = { "x": 5, "y": 5, "size": 10 };
 translationMatrix = [1, 0, 0, 1, 0, 0];
 floorY = viewport.y + viewport.size - 2;
@@ -32,14 +37,19 @@ function OnResizeCalled() {
 }
 //OnResizeCalled();
 box2d.init();
+box2d.CollisionDetection();
 
 
-
-
-mario =new Mario("e2de2");
-var marioGame=new Game(["platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png","marioRunning2.png","marioHDold.json"],[mario]);
+var AssetMgr = new AssetManager(); //asset manager tyo be used by whole game
+var levels=new Level();
+var map=new Map("marioHDold.json","platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png"); //declare all map here
+var mario =new Mario();
+//var foe= new Foe();
+var marioGame=new Game(["platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png","marioRunning2.png","coin.png","foe.png","marioHead.png"],[],map);
+var entityManager=new EntityManager();
 
 marioGame.start();
+//entityManager.addEntity(foe)
 window.addEventListener('keydown', function(event) {
   switch (event.keyCode) {
     case 37: // Left
@@ -47,7 +57,7 @@ mario.reverseRun();
       break;
 
     case 38: // Up
-      mario.up();
+      coin.animate("normal");
 
       break;
 
@@ -61,7 +71,7 @@ mario.reverseRun();
       break;
     case 32:
       mario.jump();
-      console.log("fg");
+     
       break;
   }
 }, false);

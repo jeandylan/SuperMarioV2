@@ -151,29 +151,16 @@ var box2d = {
     }
     return bodyReturn;
   },
-  destroyBody: function (bodyName) {
-    var bodyToDestroy = box2d.getBodyByName (bodyName);
-    if (bodyToDestroy != null) {
-      box2d.world.DestroyBody (bodyToDestroy);
-    }
-    else {
-      console.log ("object does not exit how to delete ?")
-    }
-  },
-
-
-
-
+    destroyBody: function(body) {
+      return this.world.DestroyBody(body);
+    },
+  
   CollisionDetection: function (callback) { //work with Dynamic obj
     var listener = new Box2D.Dynamics.b2ContactListener;
     listener.BeginContact = function (contact) {
       var bodyA = contact.GetFixtureA ().GetBody ();
       var bodyB = contact.GetFixtureB ().GetBody ();
-      var jointDef = new b2RevoluteJointDef ();
-      jointDef.Initialize (bodyA, bodyB, bodyB.GetPosition ());
-      box2d.world.CreateJoint (jointDef);
-     handleCollision(bodyA.GetUserData().name,bodyB.GetUserData().name);
-
+      handleCollision(bodyA,bodyB)
     };
     listener.PostSolve = function (contact) {
       //var body1 = contact.GetFixtureA().GetBody();
@@ -204,6 +191,14 @@ var box2d = {
         return {x: (body.GetPosition ().x - rd) * box2d.scale, y: (body.GetPosition ().y - rd) * box2d.scale};
     }
 
+  },
+  getMapBodyXY:function (body) {
+    var width = body.GetUserData ().width / 30;
+    var height = body.GetUserData ().height / 30;
+    return {
+      x: (body.GetPosition ().x - (width / 2)) * box2d.scale,
+      y: (body.GetPosition ().y - (height / 2)) * box2d.scale
+    };
   },
   createSingleBody:function (body) {
     switch (body.shape) {
