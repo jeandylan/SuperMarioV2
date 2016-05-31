@@ -5,6 +5,7 @@
 function float2int (value) {
   return value | 0;
 }
+//
 var id=0;
 function Map(path,mapTilePath) {
   this.mapJsonPath = path;
