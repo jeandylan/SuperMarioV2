@@ -11,6 +11,7 @@ function handleCollision(bodyA,bodyB) {
       mario.score++; // increase mario score
       bodyB.SetUserData (bodyBUserData);//set new value of the affected element coin  in physical world
       entityManager.addCoin ({x: bodyBUserData.x, y: bodyBUserData.y}) //the user data contain the x,y coordiante animation should occure ,the EntityManager will mange the animation
+    coinAudio.play();
     }
   }
   if (bodyAUserData.name.startsWith ("Phyfoe") || bodyBUserData.name.startsWith ("Phyfoe")) {
@@ -23,9 +24,13 @@ function handleCollision(bodyA,bodyB) {
 
   }
   if (bodyAUserData.name.startsWith ("Phywater") || bodyBUserData.name.startsWith ("Phywater")) {
-    location.reload ();
-    localStorage.setItem ("lives",3);
-    localStorage.setItem ("score",0);
+    mario.alive=false;
+    loseAudio.play()
+    setTimeout(function(){localStorage.setItem ("lives",3);
+      localStorage.setItem ("score",0);
+      location.reload (); }, 3000);
+
+
   }
   if (bodyAUserData.name.startsWith ("Phyfinish") || bodyBUserData.name.startsWith ("Phyfinish")) {
     if (levels.currentLevel == 1) {

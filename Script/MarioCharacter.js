@@ -27,6 +27,7 @@ function Mario(){
     'standFrw':[{x:0,y:0,width:125,height:188}]}; //array containing all animation coordinate from spritesheet
   this.currentAnimationCoordinate=this.animationsArray['standFrw'][this.currentFrame];
   this.isAnimation=false;
+  this.alive=true;
   this.init(); //create Physic body
   this.physicBody=box2d.getBodyByName("mario"); //cache the box2d body in this variable
 
@@ -121,14 +122,16 @@ Mario.prototype.updateAnimation=function () {
 };
 
 Mario.prototype.draw=function () {
-  var marioBody=box2d.getMapBodyPositionCanvas("mario");
-  var img = AssetMgr.getAsset (this.spritePath);
-  //context.clearRect (marioBody.x, marioBody.y, this.width, this.height);
-  this.currentAnimationCoordinate=this.animationsArray[this.currentAnimationName][this.currentFrame];
-  camera.update(marioBody.x,ctx);
-  context.drawImage (img,
-    this.currentAnimationCoordinate.x, this.currentAnimationCoordinate.y, this.currentAnimationCoordinate.width, this.currentAnimationCoordinate.height,
-    marioBody.x-(this.offset), marioBody.y, this.width, this.height);
+  if (this.alive) {
+    var marioBody = box2d.getMapBodyPositionCanvas ("mario");
+    var img = AssetMgr.getAsset (this.spritePath);
+    //context.clearRect (marioBody.x, marioBody.y, this.width, this.height);
+    this.currentAnimationCoordinate = this.animationsArray[this.currentAnimationName][this.currentFrame];
+    camera.update (marioBody.x, ctx);
+    context.drawImage (img,
+      this.currentAnimationCoordinate.x, this.currentAnimationCoordinate.y, this.currentAnimationCoordinate.width, this.currentAnimationCoordinate.height,
+      marioBody.x - (this.offset), marioBody.y, this.width, this.height);
+  }
 
 };
 

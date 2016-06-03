@@ -6,7 +6,18 @@ var canvas=document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
 ///////////////////////////////////Game Function///////////////////////////////////////////////////////////////////
-
+///Audios
+myAudio = new Audio('s.mp3');
+myAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+myAudio.play();
+//coin audio 
+coinAudio = new Audio('coinSound.mp3');
+//lose a life Audio
+loseAudio = new Audio('loseAudio.mp3');
+///
 var Game=function (assets,entities,map) {
     this.entities=entities;
     this.assets=assets;
@@ -56,7 +67,6 @@ Game.prototype.start=function () {
      
     });
 };
-
 
 Game.prototype.HUD=function () {
     ctx.font="30px Verdana";
