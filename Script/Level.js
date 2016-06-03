@@ -2,7 +2,7 @@
  * Created by dylan on 01-Jun-16.
  */
 var Level=function () {
-  this.currentLevel=0;
+  this.currentLevel=1;
   this.level1={ "height":10,
     "layers":[
       {
@@ -459,7 +459,7 @@ var Level=function () {
         "offsety":-11,
         "opacity":1,
         "type":"tilelayer",
-        "visible":false,
+        "visible":true,
         "width":48,
         "x":0,
         "y":0
@@ -666,6 +666,17 @@ var Level=function () {
             "width":248,
             "x":3086,
             "y":563
+          },
+          {
+            "height":7,
+            "id":349,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":134,
+            "x":772,
+            "y":353
           }],
         "opacity":1,
         "type":"objectgroup",
@@ -723,17 +734,6 @@ var Level=function () {
             "width":8,
             "x":3248,
             "y":1
-          },
-          {
-            "height":8,
-            "id":335,
-            "name":"",
-            "rotation":0,
-            "type":"",
-            "visible":true,
-            "width":129,
-            "x":775,
-            "y":354
           }],
         "opacity":1,
         "type":"objectgroup",
@@ -890,6 +890,17 @@ var Level=function () {
             "width":52,
             "x":1727,
             "y":419
+          },
+          {
+            "height":12,
+            "id":350,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":30,
+            "x":3004,
+            "y":452
           }],
         "opacity":1,
         "type":"objectgroup",
@@ -897,8 +908,454 @@ var Level=function () {
         "width":0,
         "x":0,
         "y":0
+      },
+      {
+        "draworder":"topdown",
+        "height":10,
+        "name":"PhyStart",
+        "objects":[
+          {
+            "height":611,
+            "id":351,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":12,
+            "x":6,
+            "y":0
+          }],
+        "opacity":1,
+        "type":"objectgroup",
+        "visible":true,
+        "width":48,
+        "x":0,
+        "y":0
       }],
-    "nextobjectid":349,
+    "nextobjectid":352,
+    "orientation":"orthogonal",
+    "renderorder":"right-down",
+    "tileheight":70,
+    "tilesets":[
+      {
+        "columns":12,
+        "firstgid":1,
+        "image":"platformerGraphicsDeluxe_Updated\/Tiles\/tiles_spritesheet.png",
+        "imageheight":936,
+        "imagewidth":914,
+        "margin":1,
+        "name":"tiles_spritesheet",
+        "spacing":2,
+        "tilecount":156,
+        "tileheight":70,
+        "tilewidth":70
+      },
+      {
+        "columns":0,
+        "firstgid":157,
+        "margin":0,
+        "name":"back",
+        "spacing":0,
+        "tilecount":1,
+        "tileheight":70,
+        "tiles":
+        {
+          "0":
+          {
+            "image":"yes.png"
+          }
+        },
+        "tilewidth":93
+      }],
+    "tilewidth":70,
+    "version":1,
+    "width":48
+  };
+  this.level3={ "height":10,
+    "layers":[
+      {
+        "data":[157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 150, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 150, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 8, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157, 157],
+        "height":10,
+        "name":"Tile Layer 1",
+        "offsetx":0,
+        "offsety":-11,
+        "opacity":1,
+        "type":"tilelayer",
+        "visible":true,
+        "width":48,
+        "x":0,
+        "y":0
+      },
+      {
+        "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 121, 0, 0, 121, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 82, 0, 0, 0, 0, 137, 137, 137, 137, 142, 0, 0, 125, 0, 0, 125, 125, 0, 126, 89, 89, 89, 89, 89, 89, 89, 89, 89, 89, 113, 113, 113, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 128, 128, 56, 56, 56, 128, 128, 128, 128, 8, 8, 8, 8, 8, 8, 8, 8, 8, 151, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 56, 56, 56, 56, 56, 56, 56],
+        "height":10,
+        "name":"graphic",
+        "opacity":1,
+        "type":"tilelayer",
+        "visible":true,
+        "width":48,
+        "x":0,
+        "y":0
+      },
+      {
+        "draworder":"topdown",
+        "height":0,
+        "name":"Phyground",
+        "objects":[
+          {
+            "height":11,
+            "id":350,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":341,
+            "x":2,
+            "y":560
+          },
+          {
+            "height":12,
+            "id":351,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":63,
+            "x":492,
+            "y":610
+          },
+          {
+            "height":9,
+            "id":352,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":128,
+            "x":705,
+            "y":614
+          },
+          {
+            "height":13,
+            "id":358,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":930,
+            "x":953,
+            "y":565
+          },
+          {
+            "height":14,
+            "id":361,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":46,
+            "x":910,
+            "y":565
+          },
+          {
+            "height":4,
+            "id":363,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":56,
+            "x":2943,
+            "y":542
+          },
+          {
+            "height":9,
+            "id":376,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":64,
+            "x":2873,
+            "y":73
+          },
+          {
+            "height":10,
+            "id":377,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":66,
+            "x":145,
+            "y":356
+          },
+          {
+            "height":12,
+            "id":378,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":57,
+            "x":1054,
+            "y":352
+          },
+          {
+            "height":9,
+            "id":379,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":61,
+            "x":2101,
+            "y":218
+          },
+          {
+            "height":14,
+            "id":380,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":53,
+            "x":2319,
+            "y":216
+          },
+          {
+            "height":9,
+            "id":393,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":690,
+            "x":1965,
+            "y":480
+          }],
+        "opacity":1,
+        "type":"objectgroup",
+        "visible":true,
+        "width":0,
+        "x":0,
+        "y":0
+      },
+      {
+        "draworder":"topdown",
+        "height":0,
+        "name":"Phywater",
+        "objects":[
+          {
+            "height":9,
+            "id":367,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":707,
+            "x":283,
+            "y":645
+          },
+          {
+            "height":18,
+            "id":369,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":836,
+            "x":1899,
+            "y":569
+          },
+          {
+            "height":15,
+            "id":370,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":297,
+            "x":2713,
+            "y":596
+          }],
+        "opacity":1,
+        "type":"objectgroup",
+        "visible":true,
+        "width":0,
+        "x":0,
+        "y":0
+      },
+      {
+        "draworder":"topdown",
+        "height":0,
+        "name":"Phyfinish",
+        "objects":[
+          {
+            "height":547,
+            "id":365,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":25,
+            "x":3031,
+            "y":8
+          },
+          {
+            "height":15,
+            "id":366,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":354,
+            "x":3014,
+            "y":562
+          }],
+        "opacity":1,
+        "type":"objectgroup",
+        "visible":true,
+        "width":0,
+        "x":0,
+        "y":0
+      },
+      {
+        "draworder":"topdown",
+        "height":0,
+        "name":"Phycoins",
+        "objects":[
+          {
+            "height":7,
+            "id":371,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":58,
+            "x":145,
+            "y":405
+          },
+          {
+            "height":8,
+            "id":372,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":58,
+            "x":1056,
+            "y":405
+          },
+          {
+            "height":6,
+            "id":373,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":66,
+            "x":2102,
+            "y":266
+          },
+          {
+            "height":6,
+            "id":374,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":57,
+            "x":2316,
+            "y":265
+          },
+          {
+            "height":8,
+            "id":375,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":50,
+            "x":2883,
+            "y":125
+          }],
+        "opacity":1,
+        "type":"objectgroup",
+        "visible":true,
+        "width":0,
+        "x":0,
+        "y":0
+      },
+      {
+        "draworder":"topdown",
+        "height":0,
+        "name":"Phyfoe",
+        "objects":[
+          {
+            "height":13,
+            "id":384,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":39,
+            "x":602,
+            "y":504
+          },
+          {
+            "height":11,
+            "id":385,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":33,
+            "x":2762,
+            "y":455
+          },
+          {
+            "height":14,
+            "id":386,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":29,
+            "x":2437,
+            "y":321
+          }],
+        "opacity":1,
+        "type":"objectgroup",
+        "visible":true,
+        "width":0,
+        "x":0,
+        "y":0
+      },
+      {
+        "draworder":"topdown",
+        "height":10,
+        "name":"PhyStart",
+        "objects":[
+          {
+            "height":585,
+            "id":387,
+            "name":"",
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":14,
+            "x":5,
+            "y":0
+          }],
+        "opacity":1,
+        "type":"objectgroup",
+        "visible":true,
+        "width":48,
+        "x":0,
+        "y":0
+      }],
+    "nextobjectid":394,
     "orientation":"orthogonal",
     "renderorder":"right-down",
     "tileheight":70,
@@ -939,7 +1396,14 @@ var Level=function () {
   };
 }
 Level.prototype.getLevelData=function () {
-  if(this.currentLevel==0){
-    return this.level1
+  if(this.currentLevel==2){
+    return this.level2
+  }
+  if (this.currentLevel==3){
+    console.log("lvl 2");
+    return this.level3;
+  }
+  else{
+    return this.level1;
   }
 }

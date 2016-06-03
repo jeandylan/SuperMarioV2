@@ -33,11 +33,15 @@ Game.prototype.animate=function () {
         box2d.world.DrawDebugData();
         var timeStep = 1/60;
         box2d.drawDebug();
+        ctx.clearRect (0, 0, 3500, 1000);
+        parallaxDrawer(); //decide what to draw
         mario.update();
+
         that.map.renderGraphics();
         that.HUD();
-      // that.renderEntity()
-        entityManager.animateEntities()
+
+      //that.renderEntity();
+        entityManager.animateEntities();
 
        that.animate();
     });
@@ -56,9 +60,10 @@ Game.prototype.start=function () {
 
 Game.prototype.HUD=function () {
     ctx.font="30px Verdana";
-    imgCoin=AssetMgr.getAsset("coin.png")
-    imgMarioHead=AssetMgr.getAsset("marioHead.png")
-    pos=box2d.getMapBodyPositionCanvas("mario")
+    ctx.fillStyle = "#000099";
+    var imgCoin=AssetMgr.getAsset("coin.png")
+    var imgMarioHead=AssetMgr.getAsset("marioHead.png")
+    var pos=box2d.getMapBodyPositionCanvas("mario")
 ctx.drawImage(imgMarioHead,pos.x+30,100,40,40)
     ctx.fillText(mario.lives.toString(),pos.x+60,100);
     ctx.drawImage(imgCoin,0,0,44,40,pos.x+150,100,40,40);

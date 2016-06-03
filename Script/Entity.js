@@ -34,8 +34,6 @@ if(this.validateAnimation()) {
   if (this.continueAnimation) {
     var currentAnimationCoordinate = this.animationsArray[this.currentAnimationName][this.currentFrame]; //get  the animation coordinate from image file based on name of current animation\
     // get the animation coordinate for current frame i.e an
-   // console.log(currentAnimationCoordinate)
-    //context.clearRect (this.coordCanvas.x, this.coordCanvas.y, this.coordCanvas.width, this.coordCanvas.height);
     context.drawImage (img,
       currentAnimationCoordinate.x, currentAnimationCoordinate.y, currentAnimationCoordinate.width, currentAnimationCoordinate.height,
       this.coordCanvas.x, this.coordCanvas.y, this.coordCanvas.width, this.coordCanvas.height);

@@ -14,7 +14,7 @@ var box2d = {
   scale: 30,
   init: function () {
     var gravity = new b2Vec2 (0, 9); //declare gravity as 9.8 m/s^2 downward
-    var allowSleep = true; //Allow objects that are at rest to fall asleep and be excluded from
+    var allowSleep = false; //Allow objects that are at rest to fall asleep and be excluded from
     box2d.world = new b2World (gravity, allowSleep);
     var timeStep = 1 / 60;
     var velocityIterations = 8;
@@ -151,8 +151,12 @@ var box2d = {
     }
     return bodyReturn;
   },
-    destroyBody: function(body) {
-      return this.world.DestroyBody(body);
+    destroyAllBody: function() {
+      for (var body = box2d.world.GetBodyList (); body; body = body.GetNext ()) {
+        if(body.getUserData().name !="mario") {
+          box2d.world.DestroyBody (body)
+        }
+      }
     },
   
   CollisionDetection: function (callback) { //work with Dynamic obj

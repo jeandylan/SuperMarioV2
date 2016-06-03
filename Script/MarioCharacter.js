@@ -80,13 +80,17 @@ Mario.prototype.jump=function () {
 
   this.currentFrame=0;
   if(this.direction=="F"){
-    this.applyForce(7500,20000);
+    this.applyForce(0,23000);
     this.currentAnimationName="jumpFrw";
   }
   if(this.direction=="R"){
-    this.applyForce(-7500,20000);
+    this.applyForce(0,23000);
     this.currentAnimationName="jumpBck";
   }
+}
+Mario.prototype.jumpUp=function () {
+  this.currentFrame=0;
+  this.applyForce(0,22000);
 }
 Mario.prototype.down=function () {
   this.currentFrame=0;

@@ -3,6 +3,7 @@
  */
 
 var canvas=document.getElementById("game");
+
 context = canvas.getContext("2d");
 scale=1/20;
 var ctx = canvas.getContext("2d");
@@ -38,27 +39,63 @@ function OnResizeCalled() {
 //OnResizeCalled();
 box2d.init();
 box2d.CollisionDetection();
+var levels=new Level();
 
 
 var AssetMgr = new AssetManager(); //asset manager tyo be used by whole game
-var levels=new Level();
-var map=new Map("marioHDold.json","platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png"); //declare all map here
-var mario =new Mario();
-//var foe= new Foe();
-var marioGame=new Game(["platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png","marioRunning2.png","coin.png","foe.png","marioHead.png"],[],map);
-var entityManager=new EntityManager();
 
+var mario =new Mario();
+if(localStorage.level !=null) {
+  levels.currentLevel = localStorage.level;
+  console.log(levels.currentLevel)
+  mario.lives= localStorage.lives;
+  mario.score=localStorage.score;
+ // localStorage.removeItem ("level");
+ // localStorage.removeItem ("lives");
+ // localStorage.removeItem ("score");
+}
+
+var map=new Map("marioHDold.json","platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png");
+var marioGame=new Game(["platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png","marioRunning2.png","coin.png",
+  "foe.png","marioHead.png",
+  "Image/parallax/cloud.png","Image/parallax/backgroundLevel1.png","Image/parallax/mountain.png",
+  "Image/parallax/backgroundLevel2.png","Image/parallax/stars.png","Image/parallax/wood.png"
+  ,"Image/parallax/backgroundLevel3.png","Image/parallax/cloudCity.png","Image/parallax/city.png"],[],map);
+var entityManager=new EntityManager();
+var parallaxNite=new ParralaxBackgroundNite();
+var parallaxDay=new ParralaxBackgroundDay();
+var parallaxCity=new ParralaxBackgroundCity();
+
+function  parallaxDrawer () {
+  switch (localStorage.level){
+    case "1":
+      parallaxDay.draw();
+      break;
+    case "2":
+      parallaxNite.draw();
+      break;
+    case "3":
+      parallaxCity.draw();
+      break;
+    default:
+      parallaxDay.draw();
+      console.log("defau")
+      break;
+  }
+
+}
 marioGame.start();
+
 //entityManager.addEntity(foe)
 window.addEventListener('keydown', function(event) {
+  event.preventDefault();
   switch (event.keyCode) {
     case 37: // Left
 mario.reverseRun();
       break;
 
     case 38: // Up
-      coin.animate("normal");
-
+      mario.jumpUp();
       break;
 
     case 39: // Right
@@ -75,5 +112,3 @@ mario.reverseRun();
       break;
   }
 }, false);
-
-

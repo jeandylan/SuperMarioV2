@@ -20,7 +20,7 @@
         }, 
         {
          "height":0,
-         "image":"platformerGraphicsDeluxe_Updated\/parralax\/layer_02_1920 x 1080.png",
+         "image":"platformerGraphicsDeluxe_Updated\/parallax\/level1_layer1.png",
          "name":"trees",
          "offsetx":-3,
          "offsety":-264,

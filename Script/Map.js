@@ -5,13 +5,13 @@
 function float2int (value) {
   return value | 0;
 }
-//
+
 var id=0;
 function Map(path,mapTilePath) {
   this.mapJsonPath = path;
   this.mapJsonGraphics;
   this.mapJsonPhysics = [];
-  this.mapJsonData=level1; ///to be change with level
+  this.mapJsonData=levels.getLevelData(); ///to be change with level
   this.mapTilesPath = mapTilePath;
   this.classifyData=function () {
     console.log("classify")
@@ -49,7 +49,6 @@ function Map(path,mapTilePath) {
 
       switch (this.mapJsonPhysics[i].name){
         case "Phyfoe":
-          console.log(this.mapJsonPhysics[i].name + id)
        for (var z=0;z< this.mapJsonPhysics[i].objects.length ;z++){
          id++; //increment id so as each object is unique
           box2d.createSingleBody ({
@@ -60,7 +59,10 @@ function Map(path,mapTilePath) {
          height: this.mapJsonPhysics[i].objects[z].height,
          type: 'k'
        });
+         var foe=new Foe(this.mapJsonPhysics[i].name + id);
+         entityManager.addEntity(foe);
           }
+
        break;
         case "Phycoins":
           for (var z=0;z< this.mapJsonPhysics[i].objects.length ;z++) {
@@ -109,7 +111,7 @@ function Map(path,mapTilePath) {
           for (var z=0;z< this.mapJsonPhysics[i].objects.length ;z++) {
             id++;
             box2d.createSingleBody ({
-              name: this.mapJsonPhysics[i].name + id, shape: 'rectangle', density: 1, friction: 0.3, restitution: 0,
+              name: this.mapJsonPhysics[i].name + id, shape: 'rectangle', density: 1, friction: 1, restitution: 0,
               x: this.mapJsonPhysics[i].objects[z].x + (this.mapJsonPhysics[i].objects[z].width / 2) - (0.04 * (this.mapJsonPhysics[i].objects[z].x)), //0.004 is because of offset
               y: (this.mapJsonPhysics[i].objects[z].y + (this.mapJsonPhysics[i].objects[z].height / 2)) + 68,
               width: this.mapJsonPhysics[i].objects[z].width,

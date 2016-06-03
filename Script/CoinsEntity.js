@@ -1,6 +1,8 @@
 /**
  * Created by dylan on 29-May-16.
  */
+
+///coins classs extends Entity Mgr
 var Coins=function (coordXY) {
   this.coinAnimation={
     normal:[{x:0,y:0,width:44,height:40},{x:44,y:0,width:44,height:40},{x:88,y:80,width:44,height:40},{x:132,y:0,width:44,height:40},{x:176,y:0,width:44,height:40}]};
@@ -23,8 +25,11 @@ Coins.prototype.toRemove=function () {
    return false;
  }
 }
-////enemey/////////////////
-var Foe=function () {
+
+
+
+////flying enememy goubi/////////////////
+var Foe=function (name) {
   this.foeAnimation={
     forward:[{x:0,y:0,width:100,height:100},{x:100,y:0,width:100,height:100}],
     back:[{x:0,y:100,width:100,height:100},{x:100,y:100,width:100,height:100}] //moving back animation
@@ -32,31 +37,32 @@ var Foe=function () {
   this.coorD={x:200, y:300, width:35,height:35}; //original coordinate as defined by tiled
   this.entityOb = new Entity("foe","foe.png",this.foeAnimation,20,this.coorD);
   this.initialPos=208;
-  this.currentAnima="back"
+  this.name=name;
+  this.currentAnima="back";
   this.startMoving();
 
 }
 Foe.prototype.animate=function () {
-  var foes = box2d.getMapBodyPositionCanvas ("Phyfoe28");
+  var foes = box2d.getMapBodyPositionCanvas (this.name);
   //var pos=box2d.getMapBodyPositionCanvas("Phyfoe27");
   //console.log(this.physicalName)//get the body from physic world of box2d
   //console.log(foes.x)
-    this.entityOb.coordCanvas.y = foes.y; //apply the body x postion to image on canvas
-    this.entityOb.coordCanvas.x = foes.x;
   this.entityOb.animate (this.currentAnima);
+  this.entityOb.coordCanvas.y = foes.y; //apply the body x postion to image on canvas
+  this.entityOb.coordCanvas.x = foes.x;
 
   }
-
-Foe.prototype.moveForward=function () { //move up along x asis
-  var bodyToForce=box2d.getBodyByName("Phyfoe28");
+Foe.prototype.moveForward=function () {
+  var bodyToForce=box2d.getBodyByName(this.name);
   bodyToForce.SetLinearVelocity(
     new b2Vec2(-1,0),
     bodyToForce.GetWorldCenter()
   );
   this.currentAnima="forward";
 }
-Foe.prototype.moveBack=function () { //move down along x axis
-  var bodyToForce=box2d.getBodyByName("Phyfoe28");
+Foe.prototype.moveBack=function () {
+  //console.log(this.name)//move down along x axis
+  var bodyToForce=box2d.getBodyByName(this.name);
   bodyToForce.SetLinearVelocity(
     new b2Vec2(1,0 ),
     bodyToForce.GetWorldCenter()
@@ -64,17 +70,20 @@ Foe.prototype.moveBack=function () { //move down along x axis
   this.currentAnima="back";
 }
 Foe.prototype.changeDirection=function () {
+  //console.log(this.name)
   if(this.currentAnima=="back"){
-    this.moveForward()
+
+    this.moveForward(this.name)
   }
   else{
-    this.moveBack()
+    this.moveBack(this.name)
   }
 }
 Foe.prototype.startMoving=function () {
   var that =this;
-  setInterval(function(){ that.changeDirection()
+ setInterval(function(){ that.changeDirection()
   }, 10000);
+
 }
 Foe.prototype.toRemove=function () {
   return false;
@@ -96,6 +105,7 @@ EntityManager.prototype.addEntity=function (entity) {
 EntityManager.prototype.animateEntities=function () {
   for(var i=0; i<this.entitiesArrayCoins.length;i++){
     if(! this.entitiesArrayCoins[i].toRemove()) {
+      //console.log(this.entitiesArrayCoins[i].name)
       this.entitiesArrayCoins[i].animate ()
     }
     else{
@@ -104,23 +114,6 @@ EntityManager.prototype.animateEntities=function () {
 
   }
 }
-EntityManager.prototype.removeOldCoin=function () {
-  var currentTime=Math.floor(new Date() / 1000);
-  console.log( "garbage collector");
-      for(var i=0; i<this.entitiesArrayCoins.length;i++){
-
-       if(currentTime>this.entitiesArrayCoins[i].timeToRemove){
-         this.entitiesArrayCoins.splice(i, 1);
-         console.log("some Things remove "+i);
-
-         //console.log( "sixe of stack");
-        }
-      }
-}
-
-
-
-////
-
+///
 
 
